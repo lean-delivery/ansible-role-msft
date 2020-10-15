@@ -12,6 +12,8 @@
     - name: Install repository defenition from the internet
       apt:
         deb: '{{ msft_repo_deb_url }}'
+      register: package_install
+      until: package_install is succeeded
 
     - name: Add universe repository
       apt_repository:
