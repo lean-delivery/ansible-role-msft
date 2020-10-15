@@ -37,15 +37,15 @@ ansible-galaxy install lean_delivery.msft
 Example Playbook
 ----------------
 
-### Installing terraform to centos 7:
+### Installing azure cli ans power shell to Ubuntu 18.04:
 ```yaml
 - name: Converge
   hosts: all
   roles:
     - role: lean_delivery.msft
       msft_package:
-        - terraform
-        - packer
+        - powershell
+        - azure-cli
 ```
 
 ### Installing msft to ubuntu 18.04:
