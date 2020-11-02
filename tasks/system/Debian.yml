@@ -19,4 +19,13 @@
       apt_repository:
         repo: '{{ universe_repo_default }}'
         validate_certs: true
+
+    - name: Add Azure CLI repo
+      template:
+        src: azure-cli.list.j2
+        dest: /etc/apt/sources.list.d/azure-cli.list
+        owner: root
+        group: root
+        mode: '0644'
+      when: add_azure_cli_repo
   become: true
