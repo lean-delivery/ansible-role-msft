@@ -1,0 +1,39 @@
+---
+name: Molecule Test
+
+on:
+  push:
+  pull_request:
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        scenario-name:
+          - default
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: "${{ github.repository }}"
+
+      - name: Checkout ansible-lint rules
+        uses: actions/checkout@v2
+        with:
+          repository: lean-delivery/ansible-lint-rules
+          path: ansible-lint-rules
+
+      - name: Molecule
+        uses: gofrolist/molecule-action@v2.0.1
+        with:
+          molecule_command: test
+          molecule_args: --scenario-name ${{ matrix.scenario-name }}
+        env:
+          PY_COLORS: '1'
+          ANSIBLE_FORCE_COLOR: '1'
